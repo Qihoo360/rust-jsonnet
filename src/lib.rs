@@ -1,7 +1,5 @@
-#![crate_type = "dylib"]
 #[warn(unused_imports)]
 extern crate libc; 
-
 pub mod jsonnet { 
 	use libc::size_t; 
 	use libc::c_char;
