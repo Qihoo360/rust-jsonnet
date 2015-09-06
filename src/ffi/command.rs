@@ -28,7 +28,6 @@ impl Jsonnet {
 				_VM = jsonnet_make();
 				_VM_LOCK = true;
 			}
-			let sz:size_t=0;
 			let data = jsonnet_evaluate_file(_VM,filename, error);
 			return data;
 		}
@@ -41,7 +40,6 @@ impl Jsonnet {
 				_VM = jsonnet_make();
 				_VM_LOCK = true;
 			}
-			let sz:size_t=0;
 			let data = jsonnet_evaluate_snippet(_VM,"snippet".as_ptr() as *const c_char,snippet, error);
 			return data;
 		}

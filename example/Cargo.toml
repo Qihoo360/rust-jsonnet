@@ -1,0 +1,10 @@
+[package]
+name = "exmple"
+version = "0.1.0"
+authors = ["yuduanchen <thisduan@gmail.com>"]
+
+[dependencies]
+libc = "*"
+
+[dependencies.jsonnet]
+git ="https://github.com/yuduanchen/rust-jsonnet.git"
