@@ -16,7 +16,7 @@ extern {
 	fn jsonnet_evaluate_file(vm: *mut JsonnetVm,filename: *const c_char,error:*mut size_t) -> *const c_char; 
 	fn jsonnet_evaluate_snippet(vm: *mut JsonnetVm,filename: *const c_char,snippet: *const c_char,error:*mut size_t) -> *const c_char; 
 	fn jsonnet_destroy(vm: *mut JsonnetVm);
-	fn jsonnet_realloc(vm: *mut JsonnetVm,buf:*const c_char,sz:size_t);
+	fn jsonnet_realloc(vm: *mut JsonnetVm,buf:*const c_char,sz:*mut size_t);
 } 
 
 pub struct Jsonnet;
