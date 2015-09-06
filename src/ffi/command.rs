@@ -21,7 +21,7 @@ extern {
 pub struct Jsonnet;
 impl Jsonnet { 
 	#[no_mangle]
-	pub fn js_evaluate_file(filename:  *const c_char,error: *mut size_t) -> *const c_char {
+	pub fn evaluate_file(filename:  *const c_char,error: *mut size_t) -> *const c_char {
 		unsafe { 
 			if !_VM_LOCK {
 				_VM = jsonnet_make();
@@ -33,7 +33,7 @@ impl Jsonnet {
 	}
 
 	#[no_mangle]
-	pub fn js_evaluate_snippet(snippet: *const c_char,error:*mut size_t) -> *const c_char {
+	pub fn evaluate_snippet(snippet: *const c_char,error:*mut size_t) -> *const c_char {
 		unsafe { 
 			if !_VM_LOCK {
 				_VM = jsonnet_make();
@@ -45,14 +45,14 @@ impl Jsonnet {
 	}
 	#[no_mangle]
 	#[warn(dead_code)]
-	pub fn js_version() -> *const c_char {
+	pub fn version() -> *const c_char {
 		unsafe { 
 			return jsonnet_version();
 		}
 	}
 	#[no_mangle]
 	#[warn(dead_code)]
-	pub fn js_destroy()  {
+	pub fn destroy()  {
 		unsafe { 
 			jsonnet_destroy(_VM);
 			_VM_LOCK = false;
