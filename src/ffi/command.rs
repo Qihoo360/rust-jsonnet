@@ -30,7 +30,7 @@ impl Jsonnet {
 			}
 			let sz:size_t=0;
 			let data = jsonnet_evaluate_file(_VM,filename, error);
-			jsonnet_realloc(_VM,data,0);
+			//jsonnet_realloc(_VM,data,0);
 			return data;
 		}
 	}
@@ -44,7 +44,7 @@ impl Jsonnet {
 			}
 			let sz:size_t=0;
 			let data = jsonnet_evaluate_snippet(_VM,"snippet".as_ptr() as *const c_char,snippet, error);
-			jsonnet_realloc(_VM,data,sz);
+			//jsonnet_realloc(_VM,data,sz);
 			return data;
 		}
 	}
