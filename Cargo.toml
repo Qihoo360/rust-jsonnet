@@ -2,5 +2,6 @@
 name = "jsonnet"
 version = "0.1.0"
 authors = ["yuduanchen <thisduan@gmail.com>"]
+repository = "https://github.com/yuduanchen/rust-jsonnet.git"
 [dependencies]
 libc = "*"
