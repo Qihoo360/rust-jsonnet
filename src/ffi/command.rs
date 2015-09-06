@@ -39,7 +39,7 @@ impl Jsonnet {
 				_VM = jsonnet_make();
 				_VM_LOCK = true;
 			}
-			let data = jsonnet_evaluate_snippet(_VM,snippet,snippet, error);
+			let data = jsonnet_evaluate_snippet(_VM,"snippet".as_ptr() as *const c_char,snippet, error);
 			return data;
 		}
 	}
