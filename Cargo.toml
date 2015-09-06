@@ -1,0 +1,10 @@
+[package]
+name = "rust-jsonnet"
+version = "0.1.0"
+authors = ["root"]
+[dependencies]
+libc = "*"
+
+[lib]
+name = "rustJsonnet"
+crate-type = ["dylib"]
