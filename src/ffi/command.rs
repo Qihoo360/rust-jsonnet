@@ -30,7 +30,7 @@ impl Jsonnet {
 			}
 			let sz:size_t=0;
 			let data = jsonnet_evaluate_file(_VM,filename, error);
-			let oc = jsonnet_realloc(_VM,data,0);
+			let oc = jsonnet_realloc(_VM,data,sz);
 			return data;
 		}
 	}
