@@ -1,6 +1,6 @@
 #![crate_type = "lib"]
 #[warn(unused_imports)]
-extern crate jsonnet; 
+extern crate lib; 
 pub mod jsonnet { 
 	use libc::size_t; 
 	use libc::c_char;
