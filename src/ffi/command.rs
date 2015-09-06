@@ -16,7 +16,7 @@ extern {
 	fn jsonnet_evaluate_file(vm: *mut JsonnetVm,filename: *const c_char,error:*mut size_t) -> *const c_char; 
 	fn jsonnet_evaluate_snippet(vm: *mut JsonnetVm,filename: *const c_char,snippet: *const c_char,error:*mut size_t) -> *const c_char; 
 	fn jsonnet_destroy(vm: *mut JsonnetVm);
-	fn jsonnet_realloc(vm: *mut JsonnetVm,buf:*const c_char,sz:*mut size_t);
+	fn jsonnet_realloc(vm: *mut JsonnetVm,buf:*const c_char,sz:size_t);
 } 
 
 pub struct Jsonnet;
@@ -28,6 +28,7 @@ impl Jsonnet {
 				_VM = jsonnet_make();
 				_VM_LOCK = true;
 			}
+			let sz:size_t=0;
 			let data = jsonnet_evaluate_file(_VM,filename, error);
 			jsonnet_realloc(_VM,data,0);
 			return data;
@@ -41,8 +42,9 @@ impl Jsonnet {
 				_VM = jsonnet_make();
 				_VM_LOCK = true;
 			}
+			let sz:size_t=0;
 			let data = jsonnet_evaluate_snippet(_VM,"snippet".as_ptr() as *const c_char,snippet, error);
-			jsonnet_realloc(_VM,data,0);
+			jsonnet_realloc(_VM,data,sz);
 			return data;
 		}
 	}
