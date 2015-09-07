@@ -2,8 +2,6 @@
 extern crate libc; 
 use libc::size_t; 
 use libc::c_char;
-use libc::c_void;
-use std::str;
 use std::ffi::CStr;
 #[warn(unused_mut)]
 #[repr(C)]
@@ -19,9 +17,8 @@ extern {
 	fn jsonnet_evaluate_file(vm: *mut JsonnetVm,filename: *const c_char,error:*mut size_t) -> *const c_char; 
 	fn jsonnet_evaluate_snippet(vm: *mut JsonnetVm,filename: *const c_char,snippet: *const c_char,error:*mut size_t) ->*const c_char; 
 	fn jsonnet_destroy(vm: *mut JsonnetVm);
-	fn jsonnet_realloc(vm: *mut JsonnetVm,buf:*const c_char,sz:size_t) ->  *const c_char;
 } 
-#[no_mangle]
+#[warn(private_no_mangle_fns)]
 fn ctos(msg_buf : *const c_char)-> String{
 	let buf_name = unsafe { CStr::from_ptr(msg_buf).to_bytes() };
 	let str_name = String::from_utf8(buf_name.to_vec()).unwrap();

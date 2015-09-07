@@ -1,8 +1,7 @@
+#[warn(unused_must_use)]
 extern crate libc; 
 extern crate jsonnet;
-use std::ffi;
 use libc::c_char;
-use libc::size_t; 
 use std::str;
 use std::error::Error;
 use std::fs::File;
@@ -28,13 +27,14 @@ pub fn version(){
 
 
 pub fn evaluate_file(){  
-	let mut filename : *const libc::c_char = CString::new("./t.jsonnet") .unwrap().as_ptr(); 
+	let filename : *const libc::c_char = CString::new("./t.jsonnet") .unwrap().as_ptr(); 
 	let json = match Jsonnet::evaluate_file(filename) {
 		Ok(json) => json,
 		Err(e) => panic!("{:?}", e)
 	}; 
 	println!("{:?}", json);
 }
+
 
 pub fn evaluate_snippet(){
 	let path = Path::new("./t.jsonnet");
@@ -45,10 +45,9 @@ pub fn evaluate_snippet(){
 		Ok(file) => file,
 	};
 	let mut s = String::new();
-	file.read_to_string(&mut s); 
-	let mut error : size_t;
-	let mut jsonTpl : *const c_char = s.as_ptr() as *const c_char;
-	let json = match Jsonnet::evaluate_snippet(jsonTpl) {
+	file.read_to_string(&mut s).unwrap();
+	let json_tpl : *const c_char = s.as_ptr() as *const c_char;
+	let json = match Jsonnet::evaluate_snippet(json_tpl) {
 		Ok(json) => json,
 		Err(e) => panic!("{:?}", e)
 	}; 
