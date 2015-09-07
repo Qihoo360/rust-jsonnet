@@ -1,15 +1,17 @@
 extern crate libc; 
 extern crate jsonnet;
+use std::ffi;
 use libc::c_char;
-use std::ffi::CStr;
 use libc::size_t; 
 use std::str;
 use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
+use std::ffi::CStr;
+use std::ffi::CString;
 use jsonnet::ffi::command::{ Jsonnet };
-
+pub type JsonnetResult = Result<String, String>;
 pub fn ctos(msg_buf : *const c_char)-> String{
 	let msg_str: &CStr = unsafe { CStr::from_ptr(msg_buf) };
 	let buf: &[u8] = msg_str.to_bytes();
@@ -23,12 +25,15 @@ pub fn version(){
 	println!("{:?}", msg_data); 
 }
 
-pub fn evaluate_file(){ 
-	let mut error : size_t;
-	error = 0; 
-	let msg_buf: *const c_char = Jsonnet::evaluate_file("./t2.jsonnet".as_ptr() as *const c_char,&mut error);
-	let msg_data: String = ctos(msg_buf);
-	println!("{:?}", msg_data); 
+
+
+pub fn evaluate_file(){  
+	let mut filename : *const libc::c_char = CString::new("./t.jsonnet") .unwrap().as_ptr(); 
+	let json = match Jsonnet::evaluate_file(filename) {
+		Ok(json) => json,
+		Err(e) => panic!("{:?}", e)
+	}; 
+	println!("{:?}", json);
 }
 
 pub fn evaluate_snippet(){
@@ -42,18 +47,19 @@ pub fn evaluate_snippet(){
 	let mut s = String::new();
 	file.read_to_string(&mut s); 
 	let mut error : size_t;
-	error = 0; 
 	let mut jsonTpl : *const c_char = s.as_ptr() as *const c_char;
-	let msg_buf: *const c_char = Jsonnet::evaluate_snippet(jsonTpl,&mut error);
-	let msg_data: String = ctos(msg_buf);
-	println!("{:?}", msg_data);
+	let json = match Jsonnet::evaluate_snippet(jsonTpl) {
+		Ok(json) => json,
+		Err(e) => panic!("{:?}", e)
+	}; 
+	println!("{:?}", json);
 }
 
 fn main() { 
 	version();
-	evaluate_file();
-	//evaluate_file();
-	//evaluate_file();
+	evaluate_file(); 
+	evaluate_file(); 
+	evaluate_file(); 
 	Jsonnet::destroy();
-	//evaluate_snippet();
+	evaluate_snippet();
 }
