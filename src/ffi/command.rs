@@ -19,10 +19,10 @@ extern {
 	fn jsonnet_destroy(vm: *mut JsonnetVm);
 } 
 #[warn(private_no_mangle_fns)]
-fn ctos(msg_buf : *const c_char)-> String{
-	let buf_name = unsafe { CStr::from_ptr(msg_buf).to_bytes() };
-	let str_name = String::from_utf8(buf_name.to_vec()).unwrap();
-	return str_name;
+fn ctos(msg : *const c_char)-> String{
+	let buf = unsafe { CStr::from_ptr(msg).to_bytes() };
+	let val = String::from_utf8(buf.to_vec()).unwrap();
+	return val;
 }
 pub struct Jsonnet;
 impl Jsonnet { 
