@@ -1,0 +1,21 @@
+[root]
+name = "exmple"
+version = "0.1.0"
+dependencies = [
+ "jsonnet 0.1.0 (git+https://github.com/yuduanchen/rust-jsonnet.git)",
+ "libc 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "jsonnet"
+version = "0.1.0"
+source = "git+https://github.com/yuduanchen/rust-jsonnet.git#ca5f5a06d4be3b6839a1abee8737af21699baae5"
+dependencies = [
+ "libc 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "libc"
+version = "0.1.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
