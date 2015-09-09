@@ -1,10 +1,14 @@
 # rust-jsonnet
 ====
 
+|Crate|
+|:------:|
+|[![](https://img.shields.io/badge/cargo.io-0.1.0-orange.svg)](https://crates.io/crates/jsonnet)|
+
+
 rust-jsonnet - The Google Jsonnet( operation data template language) for rust
 
 Google jsonnet documet: (http://google.github.io/jsonnet/doc/)
-
 
 Parse the file
 
