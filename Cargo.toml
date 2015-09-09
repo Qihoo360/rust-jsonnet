@@ -1,5 +1,6 @@
 [package]
 name = "jsonnet"
+description = "rust-jsonnet - The Google Jsonnet( operation data template language) for rust"
 version = "0.1.0"
 authors = ["yuduanchen <thisduan@gmail.com>"]
 repository = "https://github.com/yuduanchen/rust-jsonnet.git"
