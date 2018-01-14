@@ -12,7 +12,7 @@ Google jsonnet documet: (http://google.github.io/jsonnet/doc/)
 
 Parse the file
 
-```
+```rust
 #[warn(unused_must_use)]
 extern crate libc;
 extern crate jsonnet;
@@ -43,8 +43,8 @@ pub fn version(){
 pub fn evaluate_file(){  
     let filename : *const libc::c_char = CString::new("./t.jsonnet") .unwrap().as_ptr();
     let json = match Jsonnet::evaluate_file(filename) {
-    Ok(json) => json,
-    Err(e) => panic!("{:?}", e)
+        Ok(json) => json,
+        Err(e) => panic!("{:?}", e)
     };
     println!("{:?}", json);
 }
@@ -55,14 +55,14 @@ pub fn evaluate_snippet(){
     let mut file = match File::open(&path) {
     Err(why) => panic!("couldn't open {}: {}", display,
     Error::description(&why)),
-    Ok(file) => file,
+        Ok(file) => file,
     };
     let mut s = String::new();
     file.read_to_string(&mut s).unwrap();
     let json_tpl : *const c_char = s.as_ptr() as *const c_char;
     let json = match Jsonnet::evaluate_snippet(json_tpl) {
-    Ok(json) => json,
-    Err(e) => panic!("{:?}", e)
+        Ok(json) => json,
+        Err(e) => panic!("{:?}", e)
     };
     println!("{:?}", json);
 }
